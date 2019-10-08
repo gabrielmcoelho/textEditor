@@ -1,0 +1,300 @@
+/* PrismJS 1.17.1
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+json+python+r+regex */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+/* styles for Prism's highlighting features */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    /*padding: .1em;*/
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #a765b8;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #000;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    /*padding-left: 3.8em;*/
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+.line-numbers-rows > span {
+    pointer-events: none;
+    display: block;
+    counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+    content: counter(linenumber);
+    color: #999;
+    display: block;
+    padding-right: 0.8em;
+    text-align: right;
+}
+
+/*.container {*/
+/*    display: block;*/
+/*    margin: 0 auto;*/
+/*    transform: translateZ(0);*/
+/*    -webkit-text-size-adjust: none;*/
+/*}*/
+
+/* styles to help position the textarea and the backdrop at the exact same place */
+/* OBS: some css properties came from internet examples, thus not necessarily all of them are important*/
+/*TODO: Remove those css properties*/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/*code editor and backdrop have to be the same size*/
+#backdrop, #code_editor {
+    width: 100%;
+    height: 782px;
+}
+
+#code_container {
+    display: block;
+    width: 100%;
+    height: 782px;
+    padding: 0;
+    margin: 0 auto;
+    transform: translateZ(0);
+    -webkit-text-size-adjust: none;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+#backdrop {
+    position: absolute;
+    z-index: 1;
+    overflow: auto;
+    background-color: #fff;
+    pointer-events: none;
+    transition: transform 1s;
+}
+
+#code_editor {
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    position: absolute;
+    z-index: 2;
+    padding: 0;
+    padding-left: 3.8em;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    text-align: left;
+    line-height: 1.5;
+
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+
+    /* make pointer visible while text is transparent (since shown text will come from backdrop) */
+    color: black;
+    -webkit-text-fill-color: transparent;
+
+    overflow: auto;
+    resize: none;
+
+}
+
+#code_wrapper {
+    margin: 0 !important;
+    padding: 0;
+    padding-left: 3.8em;
+    border: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /*white-space: nowrap;*/
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+
+    -ms-overflow-style: none; /* internet explorer +10 */
+}
+
+/* hide horizontal scrollbar on all browsers */
+#code_wrapper::-webkit-scrollbar { width: 0 !important } /* chrome, safari, newer opera versions */
+@-moz-document url-prefix() { #code_wrapper{overflow: hidden !important} } /* firefox */
+
+
+#code_editor:focus {
+    outline: none;
+}
+
+#code_line{
+    /* TODO: test if these properties can be removed safely */
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    text-align: left;
+    line-height: 1.5;
+}
+
+#editor_looqbox_panel {
+    box-shadow: none;
+}
+
+.mark {
+    background: yellow;
+}
+
+.span-no-spacing {
+    margin: 0;
+    padding: 0;
+}
+
+#shortcutsButton {
+    background: rgb(248, 248, 248);
+    padding: 0;
+    padding-left: 3px;
+    padding-right: 3px;
+}
