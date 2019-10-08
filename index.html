@@ -1,0 +1,89 @@
+<!doctype html>
+<html ng-csp ng-app="delph" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3">
+    <link rel="stylesheet" href="styles/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="styles/editor.css">
+</head>
+
+<body>
+
+<div style="width: 50%; margin: 25px auto">
+    <div id="code_container" class="container">
+        <div id="backdrop">
+            <pre id="code_wrapper" class="line-numbers"><code id="code_line" class="language-r"></code></pre>
+        </div>
+        <textarea id="code_editor" spellcheck="false"></textarea>
+    </div>
+
+    <button type="button" id="shortcutsButton" class="btn btn-sm" data-toggle="modal" data-target="#shortcutsModal">
+<!--        <i class="fa fa-info-circle" aria-hidden="true"></i>-->
+        Shortcuts
+    </button>
+
+    <div class="modal fade" id="shortcutsModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        Shortcuts
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div>
+                            <label class="control-label looqbox-label-inside-modal">Comment lines</label>
+                            <div class="shortcut-list-item-keys spec_helper1">
+                                <span class="keyboard-key">Ctrl/Command + /</span> or
+                                <span class="keyboard-key">Ctrl/Command + Shift + c</span>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <div>
+                            <label class="control-label looqbox-label-inside-modal">Duplicate lines</label>
+                            <div class="shortcut-list-item-keys">
+                                <span class="keyboard-key">Ctrl/Command + d</span>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <div>
+                            <label class="control-label looqbox-label-inside-modal">Indentation</label>
+                            <div class="shortcut-list-item-keys spec_helper1">
+                                <span class="keyboard-key">Tab</span> and
+                                <span class="keyboard-key">Shift + Tab</span>
+                            </div>
+                            <p class="looqbox-p-inside-help-modal">Those shortcuts allow to add/remove indentation on a block of code.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pull-right">
+        <select id="language-selector" class="select-without-corners">
+            <option value="r">R</option>
+            <option value="json">JSON</option>
+            <option value="py">Python</option>
+            <option value="html">HTML</option>
+        </select>
+    </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="config/prism.js"></script>
+    <script type="text/javascript" src="config/prism.r.js"></script>
+    <script type="text/javascript" src="scripts/editor-editor.js"></script>
+</body>
+
+</html>
+
+
+
+
+
