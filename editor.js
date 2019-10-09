@@ -1,8 +1,12 @@
-var backdrop = $('#backdrop');
-var codeWrapper = $('#code_wrapper');
-var codeEditor = $('#code_editor');
-var codeLine = $('#code_line');
+var backdrop = $('#editor-backdrop');
+var codeFormatter = $('#code-formatter');
+var codeEditor = $('#code-editor');
+var codeWrapper = $('#code-wrapper');
 var languageSelector = $('#language-selector');
+
+/* ========================================================== */
+/* ==================== EDITOR FUNCTIONS ==================== */
+/* ========================================================== */
 
 /* reverse a string using built in functions */
 function reverseString(originalString) {
@@ -92,25 +96,29 @@ function removeIndentation(string){
     return string.replace("\t", "").replace(/(?:\r\n|\r|\n)\t/g, "\n");
 }
 
+/* ========================================================== */
+/* ===================== EVENT HANDLERS ===================== */
+/* ========================================================== */
+
 /* each time the textarea value changes, reflect that to backdrop and apply highlights again */
-function handleInput() {
+function handleEditorInput() {
     var text = codeEditor.val();
-    codeLine.text(text + "\r\n");
+    codeWrapper.text(text + "\r\n");
     Prism.highlightAll();
     codeEditor.trigger('scroll');
 }
 
 /* align textarea's, backdrop's and wrapper's scrolls */
-function handleScroll() {
+function handleEditorScroll() {
     var scrollTop = codeEditor.scrollTop();
     backdrop.scrollTop(scrollTop);
 
     var scrollLeft = codeEditor.scrollLeft();
-    codeWrapper.scrollLeft(scrollLeft);
+    codeFormatter.scrollLeft(scrollLeft);
 }
 
-// TODO: Refactor handleKeydown function
-function handleKeydown(e){
+// TODO: Refactor handleEditorKeyDown function
+function handleEditorKeyDown(e){
     var keyCode = e.keyCode || e.which;
 
     /* tab indentation feature */
@@ -245,10 +253,7 @@ function handleKeydown(e){
         $(this).trigger("input");
     }
 
-    /* -------------------------------------------------- */
-    /* ---------- AUTOCOMPLETE SYMBOLS FEATURE ---------- */
-    /* -------------------------------------------------- */
-
+    /* ---------- Autocomplete symbols feature ---------- */
     // TODO: Autocomplete single quotes and double quotes
     else if (keyCode === 57 && e.shiftKey || keyCode === 219) {
         e.preventDefault();
@@ -277,10 +282,10 @@ function handleKeydown(e){
 }
 
 /* applies highlights inside editor when text is selected */
-function handleMouseup() {
+function handleEditorMouseUp() {
     // first, remove highlights if they're present
     var marks = $(".mark");
-    var elementsWithHighlight = codeLine.find(marks);
+    var elementsWithHighlight = codeWrapper.find(marks);
     for(var i=0; i<elementsWithHighlight.length; i++){
         elementsWithHighlight[i].classList.remove('mark');
     }
@@ -289,7 +294,7 @@ function handleMouseup() {
         var selectedText = codeEditor.val().substring(this.selectionStart, this.selectionEnd);
         if(selectedText.search(/[^A-Za-z0-9]/) === -1){ // only highlight letters and numbers
             var selector = ":contains(" + selectedText + ")";
-            var elements = codeLine.find(selector); // search for elements that contain the selectedText
+            var elements = codeWrapper.find(selector); // search for elements that contain the selectedText
             var textBefore, textAfter, text;
             for(i=0; i<elements.length; i++){
                 // put selectedText inside span (which will give a yellow bg) and build the string again
@@ -307,16 +312,21 @@ function handleMouseup() {
     }
 }
 
+/* changes editor's language highlight option */
 function handleLanguageChange() {
-    codeLine.removeAttr('class');
+    codeWrapper.removeAttr('class');
     var newLanguage = "language-" + $(this).val();
     $("#item").attr('class', '');
-    codeLine.addClass(newLanguage);
+    codeWrapper.addClass(newLanguage);
     Prism.highlightAll();
 }
 
-codeEditor.on('input', handleInput);
-codeEditor.on('scroll', handleScroll);
-codeEditor.on('keydown', handleKeydown);
-codeEditor.on('mouseup', handleMouseup);
+/* ========================================================== */
+/* ==================== EVENT LISTENERS ===================== */
+/* ========================================================== */
+
+codeEditor.on('input', handleEditorInput);
+codeEditor.on('scroll', handleEditorScroll);
+codeEditor.on('keydown', handleEditorKeyDown);
+codeEditor.on('mouseup', handleEditorMouseUp);
 languageSelector.on('change', handleLanguageChange);

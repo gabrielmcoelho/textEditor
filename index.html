@@ -4,26 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3">
     <link rel="stylesheet" href="bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="icons.css">
     <link type="text/css" rel="stylesheet" href="prism.css">
     <link type="text/css" rel="stylesheet" href="editor.css">
 </head>
 
 <body>
 
-<div style="width: 50%; margin: 25px auto">
-    <div id="code_container" class="container">
-        <div id="backdrop">
-            <pre id="code_wrapper" class="line-numbers"><code id="code_line" class="language-r"></code></pre>
+<div style="width: 800px; margin: 25px auto">
+    <div id="editor-container" class="container">
+        <div id="editor-backdrop">
+            <pre id="code-formatter" class="line-numbers"><code id="code-wrapper" class="language-r"></code></pre>
         </div>
-        <textarea id="code_editor" spellcheck="false"></textarea>
+        <textarea id="code-editor" spellcheck="false"></textarea>
     </div>
 
-    <button type="button" id="shortcutsButton" class="btn btn-sm" data-toggle="modal" data-target="#shortcutsModal">
-<!--        <i class="fa fa-info-circle" aria-hidden="true"></i>-->
+    <button type="button" id="shortcuts-button" class="btn btn-sm" data-toggle="modal" data-target="#shortcuts-modal">
+        <i class="icon-info-circled" aria-hidden="true"></i>
         Shortcuts
     </button>
 
-    <div class="modal fade" id="shortcutsModal" role="dialog">
+    <div class="modal fade" id="shortcuts-modal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -67,7 +68,7 @@
     </div>
 
     <div class="pull-right">
-        <select id="language-selector" class="select-without-corners">
+        <select id="language-selector">
             <option value="r">R</option>
             <option value="json">JSON</option>
             <option value="py">Python</option>
@@ -75,6 +76,7 @@
         </select>
     </div>
 </div>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="bootstrap.js"></script>
     <script type="text/javascript" src="prism.js"></script>

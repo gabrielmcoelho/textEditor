@@ -5,13 +5,13 @@
     box-sizing: border-box;
 }
 
-/*code editor and backdrop have to be the same size*/
-#backdrop, #code_editor {
+/* code editor and backdrop have to be the same size */
+#editor-backdrop, #code-editor {
     width: 100%;
     height: 782px;
 }
 
-#code_container {
+#editor-container {
     display: block;
     width: 100%;
     height: 782px;
@@ -22,7 +22,7 @@
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
-#backdrop {
+#editor-backdrop {
     position: absolute;
     z-index: 1;
     overflow: auto;
@@ -31,12 +31,11 @@
     transition: transform 1s;
 }
 
-#code_editor {
+#code-editor {
     font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     position: absolute;
     z-index: 2;
-    padding: 0;
-    padding-left: 3.8em;
+    padding: 0 0 0 3.8em;
     margin: 0;
     box-sizing: border-box;
     border: none;
@@ -67,14 +66,13 @@
 
 }
 
-#code_wrapper {
+#code-formatter {
     margin: 0 !important;
     padding: 0;
     padding-left: 3.8em;
     border: 0;
     overflow-x: auto;
     overflow-y: hidden;
-    /*white-space: nowrap;*/
     word-spacing: normal;
     word-break: normal;
     word-wrap: normal;
@@ -83,16 +81,15 @@
 }
 
 /* hide horizontal scrollbar on all browsers */
-#code_wrapper::-webkit-scrollbar { width: 0 !important } /* chrome, safari, newer opera versions */
-@-moz-document url-prefix() { #code_wrapper{overflow: hidden !important} } /* firefox */
+#code-formatter::-webkit-scrollbar { width: 0 !important } /* chrome, safari, newer opera versions */
+@-moz-document url-prefix() { #code-formatter{overflow: hidden !important} } /* firefox */
 
 
-#code_editor:focus {
+#code-editor:focus {
     outline: none;
 }
 
 #code_line{
-    /* TODO: test if these properties can be removed safely */
     font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     text-align: left;
     line-height: 1.5;
@@ -111,9 +108,17 @@
     padding: 0;
 }
 
-#shortcutsButton {
+#shortcuts-button {
     background: rgb(248, 248, 248);
-    padding: 0;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding: 0 3px 0 3px;
+}
+
+#language-selector {
+    -moz-border-radius-bottomleft: 0px;
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-color: #FAFAFA;
 }
