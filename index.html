@@ -11,62 +11,13 @@
 
 <body>
 
-<div style="width: 800px; margin: 25px auto">
+<div class="editor">
     <div id="editor-container" class="container">
         <div id="editor-backdrop">
             <pre id="code-formatter" class="line-numbers"><code id="code-wrapper" class="language-r"></code></pre>
         </div>
         <textarea id="code-editor" spellcheck="false"></textarea>
     </div>
-
-    <button type="button" id="shortcuts-button" class="btn btn-sm" data-toggle="modal" data-target="#shortcuts-modal">
-        <i class="icon-info-circled" aria-hidden="true"></i>
-        Shortcuts
-    </button>
-
-    <div class="modal fade" id="shortcuts-modal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        Shortcuts
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div>
-                            <label class="control-label looqbox-label-inside-modal">Comment lines</label>
-                            <div class="shortcut-list-item-keys spec_helper1">
-                                <span class="keyboard-key">Ctrl/Command + /</span> or
-                                <span class="keyboard-key">Ctrl/Command + Shift + c</span>
-                            </div>
-                        </div>
-                        <br>
-                        <hr>
-                        <div>
-                            <label class="control-label looqbox-label-inside-modal">Duplicate lines</label>
-                            <div class="shortcut-list-item-keys">
-                                <span class="keyboard-key">Ctrl/Command + d</span>
-                            </div>
-                        </div>
-                        <br>
-                        <hr>
-                        <div>
-                            <label class="control-label looqbox-label-inside-modal">Indentation</label>
-                            <div class="shortcut-list-item-keys spec_helper1">
-                                <span class="keyboard-key">Tab</span> and
-                                <span class="keyboard-key">Shift + Tab</span>
-                            </div>
-                            <p class="looqbox-p-inside-help-modal">Those shortcuts allow to add/remove indentation on a block of code.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="pull-right">
         <select id="language-selector">
             <option value="r">R</option>

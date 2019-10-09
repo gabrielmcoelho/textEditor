@@ -122,3 +122,8 @@
     border-bottom-right-radius: 0px;
     border-color: #FAFAFA;
 }
+
+#editor {
+    width: 800px;
+    margin: 25px auto;
+}
