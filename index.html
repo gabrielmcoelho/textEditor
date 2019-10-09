@@ -10,7 +10,7 @@
 
 <body>
 
-<div class="editor">
+<div id="editor">
     <div id="editor-container" class="container">
         <div id="editor-backdrop">
             <pre id="code-formatter" class="line-numbers"><code id="code-wrapper" class="language-r"></code></pre>
@@ -18,12 +18,7 @@
         <textarea id="code-editor" spellcheck="false"></textarea>
     </div>
     <div class="pull-right">
-        <select id="language-selector">
-            <option value="r">R</option>
-            <option value="json">JSON</option>
-            <option value="py">Python</option>
-            <option value="html">HTML</option>
-        </select>
+        <select id="language-selector"></select>
     </div>
 </div>
 

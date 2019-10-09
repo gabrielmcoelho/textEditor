@@ -1,8 +1,41 @@
+/* ========================================================== */
+/* ===================== INITIALIZATION ===================== */
+/* ========================================================== */
+
 var backdrop = $('#editor-backdrop');
 var codeFormatter = $('#code-formatter');
 var codeEditor = $('#code-editor');
 var codeWrapper = $('#code-wrapper');
 var languageSelector = $('#language-selector');
+
+var languageOptions = [
+    {
+        prismAlias: 'r',
+        displayName: 'R'
+    },
+    {
+        prismAlias: 'json',
+        displayName: 'JSON'
+    },
+    {
+        prismAlias: 'py',
+        displayName: 'Python'
+    },
+    {
+        prismAlias: 'html',
+        displayName: 'HTML'
+    },
+];
+
+function fillLanguageSelector () {
+    for(var i=0; i<languageOptions.length; i++) {
+        var e = $("<option value='"+ languageOptions[i].prismAlias + "'>" + languageOptions[i].displayName + "</option>");
+        languageSelector.append(e);
+    }
+}
+
+fillLanguageSelector();
+codeWrapper.text(" ");
 
 /* ========================================================== */
 /* ==================== EDITOR FUNCTIONS ==================== */
