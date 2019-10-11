@@ -2,11 +2,11 @@
 
 # Looqbox Editor
 
-Looqbox editor is a code editor based in javascript. It uses Prism for highlight syntax and it is **CSP compliant**, which makes it a really good option since almost all other open source code editors don't work well when CSP headers are enabled. The editor can be easily embedded in your application, only requiring you to set up some prism configurations.
+Looqbox editor is a code editor based in javascript. It uses [Prism](https://prismjs.com/index.html "Prism") for highlight syntax and it is [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy "Content-Security-Policy") **compliant**, which makes it a really good option since almost all other open source code editors don't work well when CSP directives are enabled. The editor can be easily embedded in your application, only requiring you to set up some prism configurations beforehand.
 
 ## Embedding the editor
 
-To start using the editor in your application, first make sure you have jquery in your dependencies. Then, you need to configure Prism and download the configuration file after.
+To start using the editor in your application, first make sure you have jquery in your dependencies. Then, you need to configure Prism to setup the languages and plugins you want for highlighting.
 
 ### Prism configuration
 
@@ -14,5 +14,5 @@ To start using the editor in your application, first make sure you have jquery i
 2. Select the configuration you want, taking into account the following:
 - Currently, the only supported theme is the Default one
 - You can choose as many languages you want, as long as you include them in the **languageOptions** variable later
-- Currently, the supported plugins are:
+- Currently, the following plugins are supported:
   - Line Numbers
