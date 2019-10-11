@@ -67,6 +67,7 @@
 }
 
 #code-formatter {
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     margin: 0 !important;
     padding: 0;
     padding-left: 3.8em;
@@ -87,12 +88,6 @@
 
 #code-editor:focus {
     outline: none;
-}
-
-#code_line{
-    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
-    text-align: left;
-    line-height: 1.5;
 }
 
 #editor_looqbox_panel {
