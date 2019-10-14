@@ -2,11 +2,11 @@
 /* ===================== INITIALIZATION ===================== */
 /* ========================================================== */
 
-var backdrop = $('#editor-backdrop');
-var codeFormatter = $('#code-formatter');
-var codeEditor = $('#code-editor');
-var codeWrapper = $('#code-wrapper');
-var languageSelector = $('#language-selector');
+var backdrop = document.querySelector('.editor-backdrop');
+var codeFormatter = document.querySelector('.code-formatter');
+var codeEditor = document.querySelector('.code-editor');
+var codeWrapper = document.querySelector('.code-wrapper');
+var languageSelector = document.querySelector('.language-selector');
 
 var languageOptions = [
     {
@@ -29,13 +29,15 @@ var languageOptions = [
 
 function fillLanguageSelector () {
     for(var i=0; i<languageOptions.length; i++) {
-        var e = $("<option value='"+ languageOptions[i].prismAlias + "'>" + languageOptions[i].displayName + "</option>");
-        languageSelector.append(e);
+        var option = document.createElement("option");
+        option.innerHTML = languageOptions[i].displayName;
+        option.setAttribute("value", languageOptions[i].prismAlias);
+        languageSelector.appendChild(option);
     }
 }
 
 fillLanguageSelector();
-codeWrapper.text(" ");
+codeWrapper.textContent = " ";
 
 /* ========================================================== */
 /* ==================== EDITOR FUNCTIONS ==================== */
@@ -58,14 +60,14 @@ function reverseString(originalString) {
 /* count the number of lines selected by user */
 function countSelectedLines(selectionStart, selectionEnd) {
     return (
-        (codeEditor.val().substring(selectionStart, selectionEnd)
+        (codeEditor.value.substring(selectionStart, selectionEnd)
             .match(/\n/g) || []).length + 1
     )
 }
 
 /* find the beginning of the line where the selection starts */
 function findBeginningOfLine(selectionStart) {
-    var stringUntilCaret = codeEditor.val().substring(0, selectionStart);
+    var stringUntilCaret = codeEditor.value.substring(0, selectionStart);
     var reversedStr = reverseString(stringUntilCaret);
     // the position of the beginning of the line will be just after the first line break
     if(reversedStr.search("\n") === -1) return 0; // if there's no line break, then it's the first line
@@ -74,8 +76,8 @@ function findBeginningOfLine(selectionStart) {
 
 /* find the end of the line where the selection ends */
 function findEndOfLine(selectionEnd) {
-    return codeEditor.val().substring(selectionEnd).search('\n') === -1 ? codeEditor.val().length
-        : codeEditor.val().substring(selectionEnd).search('\n') + selectionEnd;
+    return codeEditor.value.substring(selectionEnd).search('\n') === -1 ? codeEditor.value.length
+        : codeEditor.value.substring(selectionEnd).search('\n') + selectionEnd;
 }
 
 /* decides whether or not a selected block of lines should be commented */
@@ -135,19 +137,19 @@ function removeIndentation(string){
 
 /* each time the textarea value changes, reflect that to backdrop and apply highlights again */
 function handleEditorInput() {
-    var text = codeEditor.val();
-    codeWrapper.text(text + "\r\n");
+    var text = codeEditor.value;
+    codeWrapper.textContent = text + "\r\n";
     Prism.highlightAll();
-    codeEditor.trigger('scroll');
+    handleEditorScroll();
 }
 
 /* align textarea's, backdrop's and wrapper's scrolls */
 function handleEditorScroll() {
-    var scrollTop = codeEditor.scrollTop();
-    backdrop.scrollTop(scrollTop);
+    var scrollTop = codeEditor.scrollTop;
+    backdrop.scrollTop = scrollTop;
 
-    var scrollLeft = codeEditor.scrollLeft();
-    codeFormatter.scrollLeft(scrollLeft);
+    var scrollLeft = codeEditor.scrollLeft;
+    codeFormatter.scrollLeft = scrollLeft;
 }
 
 // TODO: Refactor handleEditorKeyDown function
@@ -169,9 +171,9 @@ function handleEditorKeyDown(e){
             /* indentation without selecting text */
             if(selectionStart === selectionEnd){
                 // update the line by adding a tab where the caret is
-                $(this).val($(this).val().substring(0, selectionStart)
+                this.value = this.value.substring(0, selectionStart)
                     + "\t"
-                    + $(this).val().substring(selectionEnd));
+                    + this.value.substring(selectionEnd);
 
                 // put caret at right position again
                 this.selectionStart =
@@ -180,10 +182,10 @@ function handleEditorKeyDown(e){
             /* indentation where text is selected */
             else {
                 // update the selected lines by adding tabs at their beginning
-                var newStrWithIndentation = addIndentation($(this).val().substring(firstLineStart, selectionEnd));
-                $(this).val($(this).val().substring(0, firstLineStart)
+                var newStrWithIndentation = addIndentation(this.value.substring(firstLineStart, selectionEnd));
+                this.value = this.value.substring(0, firstLineStart)
                     + newStrWithIndentation
-                    + $(this).val().substring(selectionEnd));
+                    + this.value.substring(selectionEnd);
 
                 // put caret at right position again
                 this.selectionStart = selectionStart + 1;
@@ -193,10 +195,10 @@ function handleEditorKeyDown(e){
         /* unindent case */
         else{
             // update the selected lines by removing tabs at their beginning
-            var newStrWithoutIndentation= removeIndentation($(this).val().substring(firstLineStart, selectionEnd));
-            $(this).val($(this).val().substring(0, firstLineStart)
+            var newStrWithoutIndentation= removeIndentation(this.value.substring(firstLineStart, selectionEnd));
+            this.value = this.value.substring(0, firstLineStart)
                 + newStrWithoutIndentation
-                + $(this).val().substring(selectionEnd));
+                + this.value.substring(selectionEnd);
 
             // put caret at right position again
             this.selectionStart = selectionStart-1;
@@ -204,7 +206,7 @@ function handleEditorKeyDown(e){
         }
 
         // reflect changes on backdrop
-        $(this).trigger("input");
+        handleEditorInput();
     }
 
     /* comment shortcut feature */
@@ -219,12 +221,12 @@ function handleEditorKeyDown(e){
         var lastLineEnd = findEndOfLine(this.selectionEnd);
 
         /* comment case */
-        if(shouldComment($(this).val().substring(firstLineStart, lastLineEnd))){
+        if(shouldComment(this.value.substring(firstLineStart, lastLineEnd))){
             // update the selected lines by adding comment symbols at their beginning
-            var newStrWithComments = addComments($(this).val().substring(firstLineStart, selectionEnd));
-            $(this).val($(this).val().substring(0, firstLineStart)
+            var newStrWithComments = addComments(this.value.substring(firstLineStart, selectionEnd));
+            this.value = this.value.substring(0, firstLineStart)
                 + newStrWithComments
-                + $(this).val().substring(selectionEnd));
+                + this.value.substring(selectionEnd);
 
             // put caret at right position again
             this.selectionStart = selectionStart + 2;
@@ -233,10 +235,10 @@ function handleEditorKeyDown(e){
         /* uncomment case */
         else{
             // update the selected lines by removing comment symbols at their beginning
-            var newStrWithoutComments = removeComments($(this).val().substring(firstLineStart, selectionEnd));
-            $(this).val($(this).val().substring(0, firstLineStart)
+            var newStrWithoutComments = removeComments(this.value.substring(firstLineStart, selectionEnd));
+            this.value = this.value.substring(0, firstLineStart)
                 + newStrWithoutComments
-                + $(this).val().substring(selectionEnd));
+                + this.value.substring(selectionEnd);
 
             // put caret at right position again
             this.selectionStart = selectionStart - 2;
@@ -244,7 +246,7 @@ function handleEditorKeyDown(e){
         }
 
         // reflect changes on backdrop
-        $(this).trigger("input");
+        handleEditorInput();
     }
 
     /* duplicate shortcut feature */
@@ -259,31 +261,31 @@ function handleEditorKeyDown(e){
         if(selectionStart === selectionEnd){
             var lineStart = findBeginningOfLine(selectionStart);
             var lineEnd = findEndOfLine(selectionEnd);
-            var lineContent = $(this).val().substring(lineStart, lineEnd);
+            var lineContent = this.value.substring(lineStart, lineEnd);
 
             // insert the duplicated line into the editor
-            $(this).val($(this).val().substring(0, lineEnd)
+            this.value = this.value.substring(0, lineEnd)
                 + '\n' + lineContent
-                + $(this).val().substring(lineEnd));
+                + this.value.substring(lineEnd);
 
             // put caret at right position again
             this.selectionStart = this.selectionEnd = selectionStart + lineEnd - lineStart + 1;
         }
         // duplicate all selected text
         else{
-            var selectedContent = $(this).val().substring(selectionStart, selectionEnd);
+            var selectedContent = this.value.substring(selectionStart, selectionEnd);
 
             // insert the duplicated text into the editor
-            $(this).val($(this).val().substring(0, selectionEnd)
+            this.value = this.value.substring(0, selectionEnd)
                 + selectedContent
-                + $(this).val().substring(selectionEnd));
+                + this.value.substring(selectionEnd);
 
             // put caret at right position again
             this.selectionStart = selectionEnd;
             this.selectionEnd = selectionEnd + selectionEnd - selectionStart;
         }
         // reflect changes on backdrop
-        $(this).trigger("input");
+        handleEditorInput();
     }
 
     /* ---------- Autocomplete symbols feature ---------- */
@@ -302,44 +304,51 @@ function handleEditorKeyDown(e){
         }
 
         // insert the symbols
-        $(this).val($(this).val().substring(0, selectionStart)
+        this.value = this.value.substring(0, selectionStart)
             + symbols
-            + $(this).val().substring(selectionEnd));
+            + this.value.substring(selectionEnd);
 
         // put caret at right position again
         this.selectionStart = this.selectionEnd = selectionStart+1;
 
         // reflect changes on backdrop
-        $(this).trigger("input");
+        handleEditorInput();
     }
+}
+
+function contains(selector, text) {
+    var elements = document.querySelectorAll(selector);
+    return [].filter.call(elements, function(element){
+        return RegExp(text).test(element.textContent);
+    });
 }
 
 /* applies highlights inside editor when text is selected */
 function handleEditorMouseUp() {
     // first, remove highlights if they're present
-    var marks = $(".mark");
-    var elementsWithHighlight = codeWrapper.find(marks);
+    var elementsWithHighlight = codeWrapper.querySelectorAll('.mark');
     for(var i=0; i<elementsWithHighlight.length; i++){
         elementsWithHighlight[i].classList.remove('mark');
     }
     // then, apply highlights
     if(Math.abs(this.selectionEnd - this.selectionStart) >= 3){ // only highlight words with 3+ letters
-        var selectedText = codeEditor.val().substring(this.selectionStart, this.selectionEnd);
+        var selectedText = codeEditor.value.substring(this.selectionStart, this.selectionEnd);
         if(selectedText.search(/[^A-Za-z0-9]/) === -1){ // only highlight letters and numbers
-            var selector = ":contains(" + selectedText + ")";
-            var elements = codeWrapper.find(selector); // search for elements that contain the selectedText
+            // var selector = ":contains(" + selectedText + ")";
+            // var elements = codeWrapper.find(selector); // search for elements that contain the selectedText
+            var elements = contains('span', selectedText);
             var textBefore, textAfter, text;
             for(i=0; i<elements.length; i++){
                 // put selectedText inside span (which will give a yellow bg) and build the string again
                 text = elements[i].textContent;
                 textBefore = text.substring(0, text.search(selectedText));
                 textAfter = text.substring(text.search(selectedText) + selectedText.length);
-                if(textBefore.search(/<[a-zA-Z]/) === -1 && textAfter.search(/<\/[a-zA-Z]/) === -1){
-                    elements[i].innerHTML =
-                        textBefore
-                        + '<span class="mark span-no-spacing">' + selectedText + '</span>' +
-                        textAfter;
-                }
+                // if(textBefore.search(/<[a-zA-Z]/) === -1 && textAfter.search(/<\/[a-zA-Z]/) === -1){
+                elements[i].innerHTML =
+                    textBefore
+                    + '<span class="mark span-no-spacing">' + selectedText + '</span>' +
+                    textAfter;
+                // }
             }
         }
     }
@@ -347,19 +356,18 @@ function handleEditorMouseUp() {
 
 /* changes editor's language highlight option */
 function handleLanguageChange() {
-    codeWrapper.removeAttr('class');
-    var newLanguage = "language-" + $(this).val();
-    $("#item").attr('class', '');
-    codeWrapper.addClass(newLanguage);
+    codeWrapper.removeAttribute('class');
+    var newLanguage = "language-" + this.value;
+    codeWrapper.classList.add(newLanguage);
     Prism.highlightAll();
 }
 
 /* ========================================================== */
 /* ==================== EVENT LISTENERS ===================== */
-/* ========================================================== */
+/* ========================================f================== */
 
-codeEditor.on('input', handleEditorInput);
-codeEditor.on('scroll', handleEditorScroll);
-codeEditor.on('keydown', handleEditorKeyDown);
-codeEditor.on('mouseup', handleEditorMouseUp);
-languageSelector.on('change', handleLanguageChange);
+codeEditor.addEventListener('input', handleEditorInput);
+codeEditor.addEventListener('scroll', handleEditorScroll);
+codeEditor.addEventListener('keydown', handleEditorKeyDown);
+codeEditor.addEventListener('mouseup', handleEditorMouseUp);
+languageSelector.addEventListener('change', handleLanguageChange);
