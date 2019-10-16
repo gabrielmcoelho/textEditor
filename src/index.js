@@ -1,7 +1,7 @@
 import Prism from 'prismjs';
-import './editor.css';
+import './index.css';
 
-class Editor {
+class Index {
 
     /* ========================================================== */
     /* ===================== INITIALIZATION ===================== */
@@ -80,7 +80,7 @@ class Editor {
     /* find the beginning of the line where the selection starts */
     findBeginningOfLine(selectionStart) {
         var stringUntilCaret = this.codeEditor.value.substring(0, selectionStart);
-        var reversedStr = Editor.reverseString(stringUntilCaret);
+        var reversedStr = Index.reverseString(stringUntilCaret);
         // the position of the beginning of the line will be just after the first line break
         if(reversedStr.search("\n") === -1) return 0; // if there's no line break, then it's the first line
         return selectionStart - reversedStr.search("\n");
@@ -391,5 +391,5 @@ class Editor {
     }
 }
 
-export default Editor;
+export default Index;
 

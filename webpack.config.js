@@ -1,16 +1,20 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const publicPath = '/';
 
 module.exports = {
     mode: 'production',
     entry: './src/index.js',
     output: {
-        path: path.resolve('dist/js'),
-        filename: 'editor.js',
-        libraryTarget: 'commonjs2',
+        filename: 'js/editor.js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: publicPath,
+        libraryTarget: 'commonjs2'
     },
     plugins: [
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin({
+            filename: "css/editor.css"
+        })
     ],
     module: {
         rules: [
@@ -21,14 +25,11 @@ module.exports = {
             },
             {
                 test: /\.css$/i,
-                use: [{
-                    loader: MiniCssExtractPlugin.loader,
-                    options: {
-                        hmr: process.env.NODE_ENV === 'development',
-                        publicPath: 'dist/css'
-                    }
-                },
-                'css-loader'
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                    },
+                    'css-loader'
                 ]
             },
         ],
