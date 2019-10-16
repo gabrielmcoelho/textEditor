@@ -1,3 +1,6 @@
+import Prism from 'prismjs';
+import './editor.css';
+
 class Editor {
 
     /* ========================================================== */
@@ -388,5 +391,5 @@ class Editor {
     }
 }
 
-var looqEditor = new Editor('.editor');
+export default Editor;
 
