@@ -1,7 +1,7 @@
 import Prism from 'prismjs';
 import './index.css';
 
-class Index {
+class Editor {
 
     /* ========================================================== */
     /* ===================== INITIALIZATION ===================== */
@@ -391,5 +391,5 @@ class Index {
     }
 }
 
-export default Index;
+export default Editor;
 
