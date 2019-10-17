@@ -1,0 +1,128 @@
+/* styles to help position the textarea and the backdrop at the exact same place */
+/* TODO: Remove unnecessary css properties */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* code editor and backdrop have to be the same size */
+.editor-backdrop, .code-editor {
+    width: 100%;
+    height: 782px;
+}
+
+.editor-container {
+    display: block;
+    width: 100%;
+    height: 782px;
+    padding: 0;
+    margin: 0 auto;
+    transform: translateZ(0);
+    -webkit-text-size-adjust: none;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.editor-backdrop {
+    position: absolute;
+    z-index: 1;
+    overflow: auto;
+    background-color: #fff;
+    pointer-events: none;
+    transition: transform 1s;
+}
+
+.code-editor {
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    position: absolute;
+    z-index: 2;
+    padding: 0 0 0 3.8em;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    text-align: left;
+    line-height: 1.5;
+
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+
+    /* make pointer visible while text is transparent (since shown text will come from backdrop) */
+    color: black;
+    -webkit-text-fill-color: transparent;
+
+    overflow: auto;
+    resize: none;
+
+}
+
+.code-formatter {
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    margin: 0 !important;
+    padding: 0;
+    padding-left: 3.8em;
+    border: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+
+    -ms-overflow-style: none; /* internet explorer +10 */
+}
+
+/* hide horizontal scrollbar on all browsers */
+.code-formatter::-webkit-scrollbar { width: 0 !important } /* chrome, safari, newer opera versions */
+@-moz-document url-prefix() { .code-formatter{overflow: hidden !important} } /* firefox */
+
+
+.code-editor:focus {
+    outline: none;
+}
+
+.editor_looqbox_panel {
+    box-shadow: none;
+}
+
+.mark {
+    background: yellow;
+}
+
+.span-no-spacing {
+    margin: 0;
+    padding: 0;
+}
+
+.shortcuts-button {
+    background: rgb(248, 248, 248);
+    padding: 0 3px 0 3px;
+}
+
+.language-selector {
+    -moz-border-radius-bottomleft: 0px;
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-color: #FAFAFA;
+}
+
+.editor {
+    width: 800px;
+    margin: 25px auto;
+}
+
+.pull-right {
+    float: right;
+}
