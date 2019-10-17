@@ -25,7 +25,7 @@ import looqEditor from 'looq-editor';
 
 ### Downloading files
 
-Download all files inside the [resources](resources) folder
+If you don't use node, you can download all files inside the [resources](resources) folder
 
 Then, in your html, include:
 ```html
