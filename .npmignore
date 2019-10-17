@@ -1,4 +1,5 @@
 src/
+resources/
 node_modules/
 
 webpack.config.js
