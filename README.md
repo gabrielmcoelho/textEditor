@@ -2,17 +2,74 @@
 
 # Looqbox Editor
 
-Looqbox editor is a code editor based in javascript. It uses [Prism](https://prismjs.com/index.html "Prism") for highlight syntax and it is [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy "Content-Security-Policy") **compliant**, which makes it a really good option since almost all other open source code editors don't work well when CSP directives are enabled. The editor can be easily embedded in your application, only requiring you to set up some prism configurations beforehand.
+Looqbox editor is a code editor based in javascript. It uses [Prism](https://prismjs.com/index.html) for highlight syntax and it is [CSP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/CSP) **compliant**, which makes it a really good option since almost all other open source code editors don't work well when CSP directives are enabled.
 
 ## Embedding the editor
 
-To start using the editor in your application, first make sure you have jquery in your dependencies. Then, you need to configure Prism to setup the languages and plugins you want for highlighting.
+The editor can be easily embedded in your application. That can be done in two ways: using Node or downloading de source files.
 
-### Prism configuration
+### Installing with Node
 
-1. Go to https://prismjs.com/download.html#themes=prism
-2. Select the configuration you want, taking into account the following:
+First, run:
+```
+npm install looq-editor
+```
+Then, in your js file, add:
+```js
+var looqEditor = require('looq-editor').default;
+```
+Or, if you use ES6 syntax:
+```css
+import looqEditor from 'looq-editor';
+```
+
+### Downloading files
+
+Download all files inside the src folder
+
+Then, in your html, include:
+```html
+<link type="text/css" rel="stylesheet" href="resources/prism/prism.css">
+```
+```html
+<link type="text/css" rel="stylesheet" href="resources/css/editor.css">
+```
+```html
+<script type="text/javascript" src="resources/prism/prism.js"></script>
+```
+```html
+<script type="text/javascript" src="resources/js/editor.js"></script>
+```
+
+## Basic Usage
+
+In your html, create a container for the editor
+```html
+<div id='myCustomId'></div>
+```
+Customize it with the css you want:
+```css
+#myCustomId {
+  width: 800px;
+}
+```
+Then, instantiate a new editor passing the selector of the container:
+```js
+var myEditor = new looqEditor('#myCustomId');
+```
+Finally, in your css, add:
+```css
+@import '~/looq-editor/dist/css/editor.css';
+```
+
+## Configuring Prism
+By default, looq editor downloads the entire bundle that comes along with Prism. Since this package includes a lot of plugins, themes and highlight configurations for over 200 languages, it can be heavy. You can choose to install Prism as a standard module and specify what languages, plugins, and themes you want.
+
+- If you use babel, you may check out [babel-plugin-prismjs](https://www.npmjs.com/package/babel-plugin-prismjs).
+- Other option is to navigate to [Prism custom download page](https://prismjs.com/download.html#themes=prism&plugins=line-numbers) and select the options you want.
+
+While configurating plugins and themes, take the following into account:
+
 - Currently, the only supported theme is the Default one
-- You can choose as many languages you want, as long as you include them in the **languageOptions** variable later
-- Currently, the following plugins are supported:
+- The following plugins are supported:
   - Line Numbers
