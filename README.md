@@ -43,6 +43,7 @@ Then, in your html, include:
 
 ## Basic Usage
 
+#### If you installed as a npm package
 In your html, create a container for the editor
 ```html
 <div id='myCustomId'></div>
@@ -53,7 +54,7 @@ Customize it with the css you want:
   width: 800px;
 }
 ```
-Then, instantiate a new editor passing the selector of the container:
+Then, instantiate a new editor using the selector you want:
 ```js
 var myEditor = new looqEditor('#myCustomId');
 ```
@@ -61,7 +62,19 @@ Finally, in your css, add:
 ```css
 @import '~/looq-editor/dist/css/editor.css';
 ```
+#### If you included the files
+Create a container in your html, with the id **looq-editor**:
+```html
+<div id='looq-editor'></div>
+```
+This will automatically make the editor available in your application. 
 
+Then, customize the container:
+```css
+#looq-editor {
+  width: 800px;
+}
+```
 ## Configuring Prism
 By default, looq editor downloads the entire bundle that comes along with Prism. Since this package includes a lot of plugins, themes and highlight configurations for over 200 languages, it can be heavy. You can choose to install Prism as a standard module and specify what languages, plugins, and themes you want.
 
