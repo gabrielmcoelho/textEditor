@@ -80,8 +80,9 @@ By default, looq editor downloads the entire bundle that comes along with Prism.
 
 - If you use babel, you may check out [babel-plugin-prismjs](https://www.npmjs.com/package/babel-plugin-prismjs).
 - Other option is to navigate to [Prism custom download page](https://prismjs.com/download.html#themes=prism&plugins=line-numbers) and select the options you want.
+  <em>Note:</em> If you download new prism files, remember to include the new files
 
-While configurating plugins and themes, take the following into account:
+**While configurating plugins and themes, take the following into account:**
 
 - Currently, the only supported theme is the Default one
 - The following plugins are supported:
