@@ -16,11 +16,11 @@ npm install looq-editor
 ```
 Then, in your js file, add:
 ```js
-var looqEditor = require('looq-editor').default;
+var looqEditor = require('looq-editor/dist/js/editor.js').default;
 ```
 Or, if you use ES6 syntax:
 ```css
-import looqEditor from 'looq-editor';
+import looqEditor from 'looq-editor/dist/js/editor.js';
 ```
 
 ### Downloading files
@@ -60,7 +60,7 @@ var myEditor = new looqEditor('#myCustomId');
 ```
 Finally, in your css, add:
 ```css
-@import '~/looq-editor/dist/css/editor.css';
+@import 'looq-editor/dist/css/editor.css';
 ```
 #### If you included the files
 Create a container in your html, with the id **looq-editor**:
