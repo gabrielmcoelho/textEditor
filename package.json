@@ -1,6 +1,6 @@
 {
   "name": "looq-editor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a csp compliant code editor with code highlight syntax",
   "main": "dist/index.js",
   "scripts": {
