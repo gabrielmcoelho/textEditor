@@ -1,8 +1,8 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
 
-# Looqbox Editor
+# Looq Editor
 
-Looqbox editor is a code editor based in javascript. It uses [Prism](https://prismjs.com/index.html) for highlight syntax and it is [CSP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/CSP) **compliant**, which makes it a really good option since almost all other open source code editors don't work well when CSP directives are enabled.
+CSP-compliant editor is a code editor based in javascript. It uses [Prism](https://prismjs.com/index.html) for highlight syntax and it is [CSP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/CSP) **compliant**, which makes it a good alternative since almost all other open source code editors don't work well when CSP directives are enabled.
 
 ## Embedding the editor
 
