@@ -2,7 +2,7 @@
 
 # Looq Editor
 
-CSP-compliant editor is a code editor based in javascript. It uses [Prism](https://prismjs.com/index.html) for highlight syntax and it is [CSP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/CSP) **compliant**, which makes it a good alternative since almost all other open source code editors don't work well when CSP directives are enabled.
+Looq editor is a code editor based in javascript. It uses [Prism](https://prismjs.com/index.html) for highlight syntax and it is [CSP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/CSP) **compliant**, which makes it a good alternative since almost all other open source code editors don't work well when CSP directives are enabled.
 
 ## Embedding the editor
 
